@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
-// import EditWatch from "../components/EditWatch";
+import EditWatch from "../components/EditWatch";
 import WatchForm from "../components/WatchForm";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-// import { deleteWatch } from "../server-actions/deleteWatch";
+import { deleteWatch } from "../server-actions/deleteWatch";
 
 export default async function WatchList() {
   const cookieStore = cookies();
@@ -12,6 +12,7 @@ export default async function WatchList() {
   } = await supabase.auth.getSession();
   const user = session?.user;
 
+  // server component
   const { data: watches, error } = await supabase
     .from("watches")
     .select("*")
@@ -21,6 +22,7 @@ export default async function WatchList() {
   if (error) {
     console.error("Error fetching watches");
   }
+  console.log({ watches, error });
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-300">
@@ -29,6 +31,7 @@ export default async function WatchList() {
           <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-6">
             My Watch List
           </h1>
+          {/* Sign Out Button */}
           <form action="/auth/signout" method="post">
             <button
               type="submit"
@@ -38,6 +41,7 @@ export default async function WatchList() {
             </button>
           </form>
         </div>
+        {/* Watch Form Component Returned Here */}
         <WatchForm />
         <div className="mt-6">
           {watches.map((watch) => (
@@ -55,7 +59,7 @@ export default async function WatchList() {
                     type="submit"
                     className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                   >
-                    Delete
+                    Delete Watch
                   </button>
                 </form>
                 <EditWatch watch={watch} />
