@@ -30,7 +30,7 @@ export default function EditWatch({ watch }) {
               className="close text-white text-xl leading-none hover:text-gray-300 cursor-pointer float-right"
               onClick={() => setShowModal(false)}
             >
-              🅇
+              &times;
             </span>
             <form
               action={updateWatch}
