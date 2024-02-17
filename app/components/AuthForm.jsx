@@ -11,7 +11,7 @@ export default function AuthForm() {
       view="magic_link"
       showLinks={false}
       providers={[]}
-      redirectTo="https://supabase-next-watchlist.vercel.app/auth/callback"
+      redirectTo="https://supabase-next-watchlist-git-main-tonymm55s-projects.vercel.app/auth/callback"
       appearance={{
         theme: "dark",
         button: {
